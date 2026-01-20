@@ -11,13 +11,11 @@ public class Card_Script : MonoBehaviour
 
     public void Set(Player_Action action)
     {
+        Skill_Database skill_database = Skill_Database.Get_Database();
+
         this.action = action;
-        if (action == Player_Action.Pass)
-            card_name.text = "pass";
-        if (action == Player_Action.Shoot)
-            card_name.text = "shoot";
-        if (action == Player_Action.Off_Ball_Move)
-            card_name.text = "move";
+
+        card_name.text = skill_database.Get_Name_Of_Skill(action);
     }
 
     public void Act()
@@ -25,8 +23,8 @@ public class Card_Script : MonoBehaviour
         Skill_Database skill_database = Skill_Database.Get_Database();
 
         skill_database.Act_And_Calculate_Turn(action);
-
     }
+
     private void Start()
     {
         Button button = GetComponent<Button>();
@@ -38,8 +36,4 @@ public class Card_Script : MonoBehaviour
     {
         Act();
     }
-
-
-
-
 }

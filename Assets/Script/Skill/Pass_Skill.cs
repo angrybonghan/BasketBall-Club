@@ -8,21 +8,15 @@ public class Pass_Skill : Skill
 
     public override IEnumerator Act()
     {
-        Basketball_Game_Manager gm = database.game_manager;
         Basketball_Player on_ball_player = gm.Get_On_Ball_Player();
         List<Basketball_Player> off_ball_players = gm.Get_Off_Ball_Players();
 
 
         Basketball_Player target_player = null;
 
-        yield return StartCoroutine(gm.Select_Player(off_ball_players , (result) =>
-        {
-            target_player = result;
-        }));
+        yield return StartCoroutine(gm.Select_Player(off_ball_players , (result) => target_player = result));
 
         gm.Pass(on_ball_player, target_player);
-        yield return null;
-
     }
 
 

@@ -6,23 +6,40 @@ public class Skill_Database : MonoBehaviour
     public Basketball_Game_Manager game_manager;
     private static Skill_Database script;
     public static Skill_Database Get_Database() => script;
+
     public List<KeyValuePair<Player_Action, int>> skills_values = new()
     {
         new(Player_Action.Pass , 3),
         new(Player_Action.Shoot , 2),
-        new(Player_Action.Off_Ball_Move , 1)
+        new(Player_Action.Move , 1)
+    };
+
+    public List<KeyValuePair<Player_Action, string>> skills_names = new()
+    {
+        new(Player_Action.Pass , "pass"),
+        new(Player_Action.Shoot , "shoot"),
+        new(Player_Action.Move , "move")
     };
 
     public int Get_Value_Of_Skill(Player_Action action)
     {
-        foreach (var skill_value in skills_values)
+        foreach (var skill_value_pair in skills_values)
         {
-            if (action == skill_value.Key)
-                return skill_value.Value;
+            if (action == skill_value_pair.Key)
+                return skill_value_pair.Value;
         }
         return -1;
     }
 
+    public string Get_Name_Of_Skill(Player_Action action)
+    {
+        foreach (var skill_name_pair in skills_names)
+        {
+            if (action == skill_name_pair.Key)
+                return skill_name_pair.Value;
+        }
+        return "";
+    }
 
     
     private void Awake()
@@ -45,7 +62,6 @@ public class Skill_Database : MonoBehaviour
                 return;
             }
         }
-
     }
 
 

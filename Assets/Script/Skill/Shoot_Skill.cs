@@ -7,7 +7,6 @@ public class Shoot_Skill : Skill
 
     public override IEnumerator Act()
     {
-        Basketball_Game_Manager gm = database.game_manager;
         Basketball_Player on_ball_player = gm.Get_On_Ball_Player();
 
         bool success = Check_Shoot_Success(on_ball_player);

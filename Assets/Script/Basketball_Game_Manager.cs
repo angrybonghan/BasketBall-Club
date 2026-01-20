@@ -10,7 +10,8 @@ public delegate bool Player_Filter(Basketball_Player player);
 
 public class Basketball_Game_Manager : MonoBehaviour
 {
-    public static Basketball_Game_Manager script;
+    private static Basketball_Game_Manager script;
+    public static Basketball_Game_Manager Get_Game_Manager() => script;
     public GameObject player_hand_ui_object;
     public List<Basketball_Player> attack_players;
     public int current_turn = 24;
@@ -20,7 +21,6 @@ public class Basketball_Game_Manager : MonoBehaviour
     public void Set_Skill_Player(Basketball_Player player) => skill_player = player;
 
     public Basketball_Player Get_Skill_Player() => skill_player;
-
 
     
 
@@ -47,24 +47,33 @@ public class Basketball_Game_Manager : MonoBehaviour
         List<Basketball_Player> result = new();
         int main_player_index = Get_Index_Of_Player(player);
 
-
-        int left_start = Mathf.Max(0, main_player_index - range);
-        int left_end = Mathf.Max(-1, main_player_index - 1);
-        List<Basketball_Player> left_side_players = Get_Players_By_Range(left_start, left_end);
-
-
-        int max_index = Get_Attack_Player_Count();
-
-        int right_start = Mathf.Min(max_index, main_player_index + 1);
-        int right_end = Mathf.Min(max_index -1, main_player_index + range);
-
-        List<Basketball_Player> right_side_players = Get_Players_By_Range(right_start, right_end);
+       List<Basketball_Player> left_side_players = Get_Left_Side_Player(main_player_index , range);
+       List<Basketball_Player> right_side_players = Get_Right_Side_Player(main_player_index, range);
 
 
         result.AddRange(left_side_players);
         result.AddRange(right_side_players);
 
         return result;
+    }
+
+    private List<Basketball_Player> Get_Left_Side_Player(int main_player_index, int range)
+    {
+        int left_start = Mathf.Max(0, main_player_index - range);
+        int left_end = Mathf.Max(-1, main_player_index - 1);
+        List<Basketball_Player> left_side_players = Get_Players_By_Range(left_start, left_end);
+        return left_side_players;
+    }
+
+    private List<Basketball_Player> Get_Right_Side_Player(int main_player_index, int range)
+    {
+        int max_index = Get_Attack_Player_Count();
+
+        int right_start = Mathf.Min(max_index, main_player_index + 1);
+        int right_end = Mathf.Min(max_index -1, main_player_index + range);
+        List<Basketball_Player> right_side_players = Get_Players_By_Range(right_start, right_end);
+
+        return right_side_players;
     }
 
     
@@ -142,11 +151,9 @@ public class Basketball_Game_Manager : MonoBehaviour
     {
         Delete_Player_Card_UI();
         select_mode = true;
-        foreach (var player in players)
-        {
-            player.select_mode = true;
-        }
         selected_player = null;
+        foreach (var player in players)
+            player.select_mode = true;
 
 
         while (selected_player == null)
@@ -154,12 +161,9 @@ public class Basketball_Game_Manager : MonoBehaviour
 
 
         select_mode = false;
-        foreach (var player in players)
-        {
-            player.select_mode = false;
-        }
-
         on_complete(selected_player);
+        foreach (var player in players)
+            player.select_mode = false;
 
     }
 
