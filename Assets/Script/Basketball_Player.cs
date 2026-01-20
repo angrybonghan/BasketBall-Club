@@ -6,10 +6,15 @@ public class Basketball_Player : MonoBehaviour
     private Basketball_Game_Manager gm => Basketball_Game_Manager.Get_Game_Manager();
 
     [SerializeField] bool on_ball;
+    [SerializeField] bool attacker;
     public bool select_mode;
     public bool On_Ball() => on_ball;
     public void Set_On_Ball(bool on_ball) => this.on_ball = on_ball;
 
+    public bool Is_Attacker() => attacker;
+    public bool Is_Defender() => !attacker;
+
+    public void Set_Attacker(bool attacker) => this.attacker = attacker;
 
     [Header("Other_Value")]
     public int passed_value;
@@ -80,6 +85,8 @@ public class Basketball_Player : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (Is_Defender())
+            return;
 
         if (select_mode)
         {
