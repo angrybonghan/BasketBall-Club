@@ -18,6 +18,7 @@ public class Basketball_Player : MonoBehaviour
 
     [Header("Other_Value")]
     public int passed_value;
+    public int rebound_value;
 
     public int shoot_value;
 
@@ -27,7 +28,7 @@ public class Basketball_Player : MonoBehaviour
     public GameObject action_card_prefeb;
 
     
-
+    
 
     public void Show_Player_Card()
     {

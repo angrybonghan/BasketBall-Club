@@ -1,23 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-using System;
-using JetBrains.Annotations;
-using System.Linq.Expressions;
 
 
 public delegate bool Player_Filter(Basketball_Player player);
 
-public class Basketball_Game_Manager : MonoBehaviour
+public partial class Basketball_Game_Manager : MonoBehaviour
 {
     private static Basketball_Game_Manager script;
     public static Basketball_Game_Manager Get_Game_Manager() => script;
     public GameObject player_hand_ui_object;
     [HideInInspector] public List<Basketball_Player> attack_players;
     [HideInInspector] public List<Basketball_Player> defence_players;
+    [HideInInspector] public List<Basketball_Player> all_players;
 
-    [HideInInspector] public List<Basketball_Player> first_team;
-    [HideInInspector] public List<Basketball_Player> second_team;
+    [HideInInspector] public List<Basketball_Player> first_team_players;
+    [HideInInspector] public List<Basketball_Player> second_team_players;
 
     public int current_turn = 24;
     public int score = 0;
@@ -42,29 +40,30 @@ public class Basketball_Game_Manager : MonoBehaviour
     {
         Set_Player();
         Next_Round();
-        Next_Round();
     }
 
     public void Set_Player()
     {
-        first_team = new();
+        first_team_players = new();
         for (int i = 0; i < first_team_prefeb.Count; i++)
         {
             GameObject player_gameObject = Instantiate(first_team_prefeb[i], first_team_object.transform);
             Basketball_Player player = player_gameObject.GetComponent<Basketball_Player>();
 
             player.transform.localPosition = new Vector2((i-2)*2.5f , 0);
-            first_team.Add(player);
+            first_team_players.Add(player);
+            all_players.Add(player);
         }
 
-        second_team = new();
+        second_team_players = new();
         for (int i = 0; i < second_team_prefeb.Count; i++)
         {
             GameObject player_gameObject = Instantiate(second_team_prefeb[i], second_team_object.transform);
             Basketball_Player player = player_gameObject.GetComponent<Basketball_Player>();
 
             player.transform.localPosition = new Vector2((i-2)*2.5f , 0);
-            second_team.Add(player);
+            second_team_players.Add(player);
+            all_players.Add(player);
         }
 
     }
@@ -73,19 +72,20 @@ public class Basketball_Game_Manager : MonoBehaviour
     {
         bool is_first_team_attack = (round % 2) == 0;
         round++;
+        current_turn = 24;
 
         if (is_first_team_attack)
         {
-            attack_players = first_team;
-            defence_players = second_team;
+            attack_players = first_team_players;
+            defence_players = second_team_players;
 
             first_team_object.transform.position = new Vector2(0, 0);
             second_team_object.transform.position = new Vector2(0, 2.5f);
         }
         else
         {
-            attack_players = second_team;
-            defence_players = first_team;
+            attack_players = second_team_players;
+            defence_players = first_team_players;
 
             second_team_object.transform.position = new Vector2(0, 0);
             first_team_object.transform.position = new Vector2(0, 2.5f);
@@ -115,6 +115,45 @@ public class Basketball_Game_Manager : MonoBehaviour
             player.Set_Attacker(false);
     }
 
+    public void Rebound()
+    {
+        Basketball_Player rebound_player = Get_Rebound_Player();
+
+        if (rebound_player.Is_Attacker())
+        {
+            current_turn = 16;
+            rebound_player.Set_On_Ball(true);
+            return;
+        }
+        Next_Round();
+
+    }
+
+    private Basketball_Player Get_Rebound_Player()
+    {
+        int max_value = Get_Max_Rebound_Value();
+        int random = Random.Range(0, max_value);
+
+        foreach (var player in all_players)
+        {
+            random -= player.rebound_value;
+            if (random < 0)
+                return player;
+        }
+
+        return null;
+    }
+
+    private int Get_Max_Rebound_Value()
+    {
+        int result = 0;
+        foreach (var player in all_players)
+        {
+            result += player.rebound_value;
+        }
+        
+        return result;
+    }
     
 
     public int Get_Attack_Player_Count() => attack_players.Count;
@@ -231,7 +270,7 @@ public class Basketball_Game_Manager : MonoBehaviour
 
     public void Set_Selected_Player(Basketball_Player player) => selected_player = player;
 
-    public IEnumerator Select_Player(List<Basketball_Player> players , Action<Basketball_Player> on_complete)
+    public IEnumerator Select_Player(List<Basketball_Player> players , System.Action<Basketball_Player> on_complete)
     {
         Delete_Player_Card_UI();
         select_mode = true;

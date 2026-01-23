@@ -10,11 +10,19 @@ public class Shoot_Skill : Skill
         Basketball_Player on_ball_player = gm.Get_On_Ball_Player();
 
         bool success = Check_Shoot_Success(on_ball_player);
+        on_ball_player.Set_On_Ball(false);
 
         if (success)
+        {
             gm.score += 2;
-        yield return null;
+            gm.Next_Round();
+            yield break;
+        }
 
+        gm.Rebound();
+
+
+        yield return null;
     }
 
 

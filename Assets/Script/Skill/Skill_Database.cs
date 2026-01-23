@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Skill_Database : MonoBehaviour
 {
-    public Basketball_Game_Manager game_manager;
+    public Basketball_Game_Manager gm;
     private static Skill_Database script;
     public static Skill_Database Get_Database() => script;
 
@@ -51,14 +51,15 @@ public class Skill_Database : MonoBehaviour
     public void Act_And_Calculate_Turn(Player_Action action)
     {
         Skill[] skills = GetComponents<Skill>();
-        ref int turn = ref game_manager.current_turn;
+        ref int turn = ref gm.current_turn;
 
         foreach (var skill in skills)
         {
             if (action == skill.Get_Action() && turn >= Get_Value_Of_Skill(action))
             {
-                StartCoroutine(skill.Act());
                 turn -= Get_Value_Of_Skill(action);
+                gm.Delete_Player_Card_UI();
+                StartCoroutine(skill.Act());
                 return;
             }
         }

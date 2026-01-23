@@ -280,8 +280,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   on_ball: 0
+  attacker: 0
   select_mode: 0
   passed_value: 0
+  rebound_value: 5
   shoot_value: 50
   on_ball_actions: 0200000003000000
   off_ball_actions: 01000000
