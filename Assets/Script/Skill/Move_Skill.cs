@@ -6,6 +6,10 @@ public class Move_Skill : Skill
 {
     public override Player_Action Get_Action() => Player_Action.Move;
 
+    public override string Get_Name() => "move";
+
+    public override int Get_Value() => 2;
+
     Basketball_Player main_player;
     Basketball_Player target_player;
     int main_player_index;

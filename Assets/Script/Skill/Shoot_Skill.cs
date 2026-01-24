@@ -5,6 +5,10 @@ public class Shoot_Skill : Skill
 {
     public override Player_Action Get_Action() => Player_Action.Shoot;
 
+    public override string Get_Name() => "shoot";
+
+    public override int Get_Value() => 0;
+
     public override IEnumerator Act()
     {
         Basketball_Player on_ball_player = gm.Get_On_Ball_Player();

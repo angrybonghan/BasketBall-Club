@@ -7,38 +7,18 @@ public class Skill_Database : MonoBehaviour
     private static Skill_Database script;
     public static Skill_Database Get_Database() => script;
 
-    public List<KeyValuePair<Player_Action, int>> skills_values = new()
-    {
-        new(Player_Action.Pass , 3),
-        new(Player_Action.Shoot , 2),
-        new(Player_Action.Move , 1)
-    };
-
-    public List<KeyValuePair<Player_Action, string>> skills_names = new()
-    {
-        new(Player_Action.Pass , "pass"),
-        new(Player_Action.Shoot , "shoot"),
-        new(Player_Action.Move , "move")
-    };
-
     public int Get_Value_Of_Skill(Player_Action action)
     {
-        foreach (var skill_value_pair in skills_values)
-        {
-            if (action == skill_value_pair.Key)
-                return skill_value_pair.Value;
-        }
-        return -1;
+        Skill skill = Get_Skill(action);
+       
+        return skill.Get_Value();
     }
 
     public string Get_Name_Of_Skill(Player_Action action)
     {
-        foreach (var skill_name_pair in skills_names)
-        {
-            if (action == skill_name_pair.Key)
-                return skill_name_pair.Value;
-        }
-        return "";
+        Skill skill = Get_Skill(action);
+        
+        return skill.Get_Name();
     }
 
     
@@ -65,6 +45,16 @@ public class Skill_Database : MonoBehaviour
         }
     }
 
+    public Skill Get_Skill(Player_Action action)
+    {
+        Skill[] skills = GetComponents<Skill>();
+        foreach (var skill in skills)
+        {
+            if (skill.Get_Action() == action)
+                return skill;
+        }
+        return null;
+    }
 
 
 }
