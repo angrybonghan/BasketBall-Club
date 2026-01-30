@@ -282,11 +282,14 @@ MonoBehaviour:
   on_ball: 0
   attacker: 0
   select_mode: 0
-  passed_value: 0
+  pass_value: 90
   rebound_value: 5
   shoot_value: 50
-  on_ball_actions: 0200000003000000
-  off_ball_actions: 01000000
+  adding_shoot_value: 0
+  adding_score_value: 0
+  adding_pass_value: 0
+  on_ball_actions: 020000000300000004000000050000000600000007000000
+  off_ball_actions: 0100000008000000
   action_card_prefeb: {fileID: 4791810646826894256, guid: e191bbcfdeea0274886ccc56cb5257d3, type: 3}
 --- !u!58 &3039040944338378034
 CircleCollider2D:

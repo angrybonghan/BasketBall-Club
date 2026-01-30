@@ -35,7 +35,7 @@ public class Skill_Database : MonoBehaviour
 
         foreach (var skill in skills)
         {
-            if (action == skill.Get_Action() && turn >= Get_Value_Of_Skill(action))
+            if (Can_Act_Action(action , turn , skill))
             {
                 turn -= Get_Value_Of_Skill(action);
                 gm.Delete_Player_Card_UI();
@@ -43,6 +43,16 @@ public class Skill_Database : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private bool Can_Act_Action(Player_Action action, int turn , Skill skill)
+    {
+        Basketball_Player skill_player = gm.Get_Skill_Player();
+        bool is_same_action = action == skill.Get_Action();
+        bool is_turn_enough = turn >= Get_Value_Of_Skill(action);
+        bool is_position_right = skill.Get_Position_By_Index(gm.Get_Index_Of_Player(skill_player));
+
+        return is_same_action && is_turn_enough && is_position_right;
     }
 
     public Skill Get_Skill(Player_Action action)

@@ -600,6 +600,11 @@ GameObject:
   - component: {fileID: 704382740}
   - component: {fileID: 704382741}
   - component: {fileID: 704382742}
+  - component: {fileID: 704382743}
+  - component: {fileID: 704382746}
+  - component: {fileID: 704382745}
+  - component: {fileID: 704382744}
+  - component: {fileID: 704382747}
   m_Layer: 0
   m_Name: Skill_Database
   m_TagString: Untagged
@@ -669,6 +674,66 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5122c733df2ecb242a854322d02e574a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &704382743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704382737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89b19355a148a44cb3d26809b5652fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &704382744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704382737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3eea1e3f192c74f9297390936d7b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &704382745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704382737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268f0b7b42745a14e9d4a55c639b66e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &704382746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704382737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ca1d57eb0eae24081ee4171595d681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &704382747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704382737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0579dfcc23dc99d4b962c91068301618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &957069876

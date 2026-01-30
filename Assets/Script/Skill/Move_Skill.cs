@@ -4,16 +4,25 @@ using System.Collections.Generic;
 
 public class Move_Skill : Skill
 {
+    Basketball_Player main_player;
+    Basketball_Player target_player;
+    int main_player_index;
+    int target_player_index;
+
     public override Player_Action Get_Action() => Player_Action.Move;
 
     public override string Get_Name() => "move";
 
     public override int Get_Value() => 2;
 
-    Basketball_Player main_player;
-    Basketball_Player target_player;
-    int main_player_index;
-    int target_player_index;
+    public override byte Get_Position_Query()
+    {
+        if (position_query == 0)
+            position_query = Make_Position_Query(true, true, true, true, true);
+        return position_query;
+    }
+
+
     public override IEnumerator Act()
     {
         main_player = gm.Get_Skill_Player();
@@ -37,7 +46,4 @@ public class Move_Skill : Skill
         gm.attack_players[target_player_index] = main_player;
         main_player.transform.position = new Vector2((target_player_index - 2) * 2.5f, 0);
     }
-
-
-
 }

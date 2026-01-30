@@ -17,18 +17,40 @@ public class Basketball_Player : MonoBehaviour
     public void Set_Attacker(bool attacker) => this.attacker = attacker;
 
     [Header("Other_Value")]
-    public int passed_value;
-    public int rebound_value;
+    [SerializeField] private int pass_value;
+    [SerializeField] private int rebound_value;
+    [SerializeField] private int shoot_value;
 
-    public int shoot_value;
+    public int adding_shoot_value;
+    public int adding_score_value;
+    public int adding_pass_value;
+
 
     public List<Player_Action> on_ball_actions;
     public List<Player_Action> off_ball_actions;
 
     public GameObject action_card_prefeb;
 
-    
-    
+
+    public int Get_Pass_Value()
+    {
+        return pass_value;
+    }
+
+    public int Get_Shoot_Value()
+    {
+        return shoot_value + adding_shoot_value;
+    }
+
+    public int Get_Score_Value()
+    {
+        return adding_score_value;
+    }
+
+    public int Get_Rebound_Value()
+    {
+        return rebound_value;
+    }
 
     public void Show_Player_Card()
     {
@@ -60,6 +82,11 @@ public class Basketball_Player : MonoBehaviour
         }
     }
 
+    public void Set_Name(string name)
+    {
+        Show_Player_Name text_box = GetComponent<Show_Player_Name>();
+        text_box.Set_Text(name);
+    }
 
     private void Update()
     {
@@ -108,5 +135,10 @@ public enum Player_Action {
     None,
     Move,
     Shoot,
-    Pass
+    Pass,
+    Calm_Pass,
+    Layup,
+    Calm_Shoot,
+    Flash_Pass,
+    Leadership
 }

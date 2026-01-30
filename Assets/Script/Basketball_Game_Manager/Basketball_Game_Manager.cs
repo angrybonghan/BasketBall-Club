@@ -57,6 +57,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
             GameObject player_gameObject = Instantiate(player_prefeb[i], parent.transform);
             Basketball_Player player = player_gameObject.GetComponent<Basketball_Player>();
 
+            player.Set_Name((i + 1).ToString());
             player.transform.localPosition = new Vector2((i-2)*2.5f , 0);
             result.Add(player);
             all_players.Add(player);
@@ -118,6 +119,105 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         passing_player.Set_On_Ball(false);
 
         passed_player.Set_On_Ball(true);
+    }
+
+    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible)
+    {
+        float random_value = Random.Range(0.0f, 1f);
+        if (random_value > pass_possible)
+        {
+            Next_Round();
+            return;
+        }
+        Pass(passing_player, passed_player);
+    }
+
+    public IEnumerator Pass_Coroutine(Basketball_Player passing_player , int pass_range, float pass_possible, System.Action<Basketball_Player> action_to_target_player = null)
+    {
+        List<Basketball_Player> passable_players = Get_Near_Players(passing_player,pass_range);
+
+
+        Basketball_Player target_player = null;
+
+        yield return StartCoroutine(Select_Player(passable_players , (result) => target_player = result));
+
+        if(action_to_target_player != null)
+            action_to_target_player(target_player);
+
+        Pass(passing_player, target_player,pass_possible);
+    }
+
+    public IEnumerator Shoot_Coroutine(Basketball_Player shooter,int shoot_score, float shoot_possibility)
+    {
+
+        bool success = Check_Shoot_Success(shoot_possibility);
+        shooter.Set_On_Ball(false);
+
+        if (success)
+        {
+            score += shoot_score;
+            Next_Round();
+            yield break;
+        }
+
+        Rebound();
+
+        yield return null;
+
+    }
+
+    public void Move(Basketball_Player player , int move_range)
+    {
+        int player_index = Get_Index_Of_Player(player);
+        move_range = Mathf.Min(attack_players.Count - player_index - 1, move_range);
+        move_range = Mathf.Max(-player_index, move_range);
+
+        if (move_range > 0)
+            Move_Right(player, move_range);
+        else
+            Move_Left(player, -move_range);
+
+        Update_Player_Display();
+        
+    }
+
+    private void Move_Right(Basketball_Player player, int move_range)
+    {
+        int player_index = Get_Index_Of_Player(player);
+        for (int i = 0; i < move_range; i++)
+        {
+            attack_players[player_index + i] = attack_players[player_index + i + 1];
+        }
+        attack_players[player_index + move_range] = player;
+    }
+
+    private void Move_Left(Basketball_Player player, int move_range)
+    {
+        int player_index = Get_Index_Of_Player(player);
+
+        for (int i = 0; i < move_range; i++)
+        {
+            attack_players[player_index - i] = attack_players[player_index - i - 1];
+        }
+        attack_players[player_index - move_range] = player;
+    }
+
+    public void Update_Player_Display()
+    {
+        for (int i = 0; i < attack_players.Count; i++)
+        {
+            attack_players[i].transform.position = new Vector2((i - 2) * 2.5f, 0);
+        }
+    }
+
+
+    private bool Check_Shoot_Success(float shoot_possibility)
+    {
+        float random_value = Random.Range(0f, 1f);
+
+        if (shoot_possibility > random_value)
+            return true;
+        return false;
     }
 
     public void Delete_Player_Card_UI()

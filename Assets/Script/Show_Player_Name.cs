@@ -10,6 +10,12 @@ public class Show_Player_Name : MonoBehaviour
     {
         text_script.text = text;
     }
+    public void Set_Text(string text)
+    {
+        this.text = text;
+
+        text_script.text = text;
+    }
 
 
 }

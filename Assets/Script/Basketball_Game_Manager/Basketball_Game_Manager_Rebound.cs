@@ -23,7 +23,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
         foreach (var player in all_players)
         {
-            random -= player.rebound_value;
+            random -= player.Get_Rebound_Value();
             if (random < 0)
                 return player;
         }
@@ -36,7 +36,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         int result = 0;
         foreach (var player in all_players)
         {
-            result += player.rebound_value;
+            result += player.Get_Rebound_Value();
         }
         
         return result;
