@@ -24,8 +24,8 @@ public class LeaderShip_Skill : Skill
         List<Basketball_Player> attack_players = gm.attack_players;
         foreach (var player in attack_players)
         {
-            player.adding_score_value += 1;
-            player.adding_pass_value += 5;
+            player.additional_stat.score_value += 1;
+            player.additional_stat.pass_value += 5;
         }
 
 

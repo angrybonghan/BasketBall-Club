@@ -26,8 +26,8 @@ public class Flash_Pass_Skill : Skill
 
         yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, 5, pass_value , (target_player) =>
         {
-            target_player.adding_score_value = 1;
-            target_player.adding_shoot_value = 10;
+            target_player.additional_stat.score_value += 1;
+            target_player.additional_stat.shoot_value += 10;
         }));
     }
 

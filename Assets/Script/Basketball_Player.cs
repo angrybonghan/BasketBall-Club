@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class Basketball_Player : MonoBehaviour
 {
@@ -16,15 +17,11 @@ public class Basketball_Player : MonoBehaviour
 
     public void Set_Attacker(bool attacker) => this.attacker = attacker;
 
-    [Header("Other_Value")]
-    [SerializeField] private int pass_value;
-    [SerializeField] private int rebound_value;
-    [SerializeField] private int shoot_value;
 
-    public int adding_shoot_value;
-    public int adding_score_value;
-    public int adding_pass_value;
+    [Header("Stat")]
+    [SerializeField] private Player_Stat standard_stat;
 
+    public Player_Stat additional_stat;
 
     public List<Player_Action> on_ball_actions;
     public List<Player_Action> off_ball_actions;
@@ -34,22 +31,22 @@ public class Basketball_Player : MonoBehaviour
 
     public int Get_Pass_Value()
     {
-        return pass_value;
+        return standard_stat.pass_value + additional_stat.pass_value;
     }
 
     public int Get_Shoot_Value()
     {
-        return shoot_value + adding_shoot_value;
+        return standard_stat.shoot_value + additional_stat.shoot_value;
     }
 
     public int Get_Score_Value()
     {
-        return adding_score_value;
+        return standard_stat.score_value + additional_stat.score_value;
     }
 
     public int Get_Rebound_Value()
     {
-        return rebound_value;
+        return standard_stat.rebound_value + additional_stat.rebound_value;
     }
 
     public void Show_Player_Card()
@@ -141,4 +138,17 @@ public enum Player_Action {
     Calm_Shoot,
     Flash_Pass,
     Leadership
+}
+
+
+
+[Serializable]
+public class Player_Stat
+{
+    public int pass_value = 0;
+    public int rebound_value = 0;
+    public int shoot_value = 0;
+    public int score_value = 0;
+
+
 }

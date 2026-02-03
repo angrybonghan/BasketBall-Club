@@ -90,6 +90,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
         Set_Attacker_And_Defender();
         Set_Ball();
+        Set_Player_Stat_Clear();
     }
 
     private void Set_Ball()
@@ -110,6 +111,12 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
         foreach (var player in defence_players)
             player.Set_Attacker(false);
+    }
+
+    private void Set_Player_Stat_Clear()
+    {
+        foreach (var player in all_players)
+            player.additional_stat = new Player_Stat();
     }
 
     public int Get_Attack_Player_Count() => attack_players.Count;
