@@ -7,6 +7,7 @@ public delegate bool Player_Filter(Basketball_Player player);
 
 public partial class Basketball_Game_Manager : MonoBehaviour
 {
+    
     private static Basketball_Game_Manager script;
     public static Basketball_Game_Manager Get_Game_Manager() => script;
     public GameObject player_hand_ui_object;
@@ -121,39 +122,6 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     public int Get_Attack_Player_Count() => attack_players.Count;
 
-    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player)
-    {
-        passing_player.Set_On_Ball(false);
-
-        passed_player.Set_On_Ball(true);
-    }
-
-    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible)
-    {
-        float random_value = Random.Range(0.0f, 1f);
-        if (random_value > pass_possible)
-        {
-            Next_Round();
-            return;
-        }
-        Pass(passing_player, passed_player);
-    }
-
-    public IEnumerator Pass_Coroutine(Basketball_Player passing_player , int pass_range, float pass_possible, System.Action<Basketball_Player> action_to_target_player = null)
-    {
-        List<Basketball_Player> passable_players = Get_Near_Players(passing_player,pass_range);
-
-
-        Basketball_Player target_player = null;
-
-        yield return StartCoroutine(Select_Player(passable_players , (result) => target_player = result));
-
-        if(action_to_target_player != null)
-            action_to_target_player(target_player);
-
-        Pass(passing_player, target_player,pass_possible);
-    }
-
     public IEnumerator Shoot_Coroutine(Basketball_Player shooter,int shoot_score, float shoot_possibility)
     {
 
@@ -171,42 +139,6 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
         yield return null;
 
-    }
-
-    public void Move(Basketball_Player player , int move_range)
-    {
-        int player_index = Get_Index_Of_Player(player);
-        move_range = Mathf.Min(attack_players.Count - player_index - 1, move_range);
-        move_range = Mathf.Max(-player_index, move_range);
-
-        if (move_range > 0)
-            Move_Right(player, move_range);
-        else
-            Move_Left(player, -move_range);
-
-        Update_Player_Display();
-        
-    }
-
-    private void Move_Right(Basketball_Player player, int move_range)
-    {
-        int player_index = Get_Index_Of_Player(player);
-        for (int i = 0; i < move_range; i++)
-        {
-            attack_players[player_index + i] = attack_players[player_index + i + 1];
-        }
-        attack_players[player_index + move_range] = player;
-    }
-
-    private void Move_Left(Basketball_Player player, int move_range)
-    {
-        int player_index = Get_Index_Of_Player(player);
-
-        for (int i = 0; i < move_range; i++)
-        {
-            attack_players[player_index - i] = attack_players[player_index - i - 1];
-        }
-        attack_players[player_index - move_range] = player;
     }
 
     public void Update_Player_Display()

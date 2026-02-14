@@ -26,18 +26,9 @@ public class Pass_Skill : Skill
         float pass_value = on_ball_player.Get_Pass_Value() / 100f;
 
 
-        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, 5, pass_value));
+        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, pass_range:5, pass_value));
     }
 
-
-    private Basketball_Player Get_Random_Target_Player(List<Basketball_Player> off_ball_players)
-    {
-
-        int max_index = off_ball_players.Count;
-        int random_index = Random.Range(0, max_index);
-
-        return off_ball_players[random_index];
-    }
 
 
 }

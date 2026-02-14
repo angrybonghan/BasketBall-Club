@@ -10,6 +10,9 @@ public class Basketball_Player : MonoBehaviour
     [SerializeField] bool attacker;
     public bool select_mode;
     public bool On_Ball() => on_ball;
+
+    public bool Off_Ball() => !on_ball;
+
     public void Set_On_Ball(bool on_ball) => this.on_ball = on_ball;
 
     public bool Is_Attacker() => attacker;

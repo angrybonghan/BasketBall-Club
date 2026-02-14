@@ -34,7 +34,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     public List<Basketball_Player> Get_Off_Ball_Players()
     {
-        return Get_Players((player) => player.On_Ball() == false);
+        return Get_Players((player) => player.Off_Ball());
     }
 
     public Basketball_Player Get_On_Ball_Player()
@@ -75,9 +75,10 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     private List<Basketball_Player> Get_Left_Side_Player(int main_player_index, int range)
     {
-        int left_start = Mathf.Max(0, main_player_index - range);
-        int left_end = Mathf.Max(-1, main_player_index - 1);
-        List<Basketball_Player> left_side_players = Get_Players_By_Range(left_start, left_end);
+        int start = Mathf.Max(0, main_player_index - range);
+        int end = Mathf.Max(-1, main_player_index - 1);
+
+        List<Basketball_Player> left_side_players = Get_Players_By_Range(start, end);
         return left_side_players;
     }
 
@@ -85,9 +86,10 @@ public partial class Basketball_Game_Manager : MonoBehaviour
     {
         int max_index = Get_Attack_Player_Count();
 
-        int right_start = Mathf.Min(max_index, main_player_index + 1);
-        int right_end = Mathf.Min(max_index -1, main_player_index + range);
-        List<Basketball_Player> right_side_players = Get_Players_By_Range(right_start, right_end);
+        int start = Mathf.Min(max_index, main_player_index + 1);
+        int end = Mathf.Min(max_index -1, main_player_index + range);
+
+        List<Basketball_Player> right_side_players = Get_Players_By_Range(start, end);
 
         return right_side_players;
     }

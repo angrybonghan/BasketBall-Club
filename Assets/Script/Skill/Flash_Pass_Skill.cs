@@ -24,7 +24,7 @@ public class Flash_Pass_Skill : Skill
         float pass_value = (on_ball_player.Get_Pass_Value()-35) / 100f;
 
 
-        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, 5, pass_value , (target_player) =>
+        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, pass_range:5, pass_value , (target_player) =>
         {
             target_player.additional_stat.score_value += 1;
             target_player.additional_stat.shoot_value += 10;

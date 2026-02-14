@@ -20,7 +20,7 @@ public class Calm_Shoot_Skill : Skill
     public override IEnumerator Act()
     {
         Basketball_Player on_ball_player = gm.Get_On_Ball_Player();
-        int shoot_score = 2;
+        int shoot_score = 2 + on_ball_player.Get_Score_Value();
         float shoot_possibility = (on_ball_player.Get_Shoot_Value() + 30) / 100f;
 
 

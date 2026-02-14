@@ -37,19 +37,28 @@ public class Skill_Database : MonoBehaviour
         {
             if (Can_Act_Action(action , turn , skill))
             {
-                turn -= Get_Value_Of_Skill(action);
-                gm.Delete_Player_Card_UI();
-                StartCoroutine(skill.Act());
+                Act_Skill(skill);
+                
                 return;
             }
         }
     }
 
+    private void Act_Skill(Skill skill)
+    {
+        ref int turn = ref gm.current_turn;
+        
+        turn -= skill.Get_Value();
+        gm.Delete_Player_Card_UI();
+        StartCoroutine(skill.Act());
+    }
+    
+
     private bool Can_Act_Action(Player_Action action, int turn , Skill skill)
     {
         Basketball_Player skill_player = gm.Get_Skill_Player();
         bool is_same_action = action == skill.Get_Action();
-        bool is_turn_enough = turn >= Get_Value_Of_Skill(action);
+        bool is_turn_enough = turn >= skill.Get_Value();
         bool is_position_right = skill.Get_Position_By_Index(gm.Get_Index_Of_Player(skill_player));
 
         return is_same_action && is_turn_enough && is_position_right;

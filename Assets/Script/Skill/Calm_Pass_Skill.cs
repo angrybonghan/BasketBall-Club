@@ -25,7 +25,7 @@ public class Calm_Pass_Skill : Skill
         float pass_value = (on_ball_player.Get_Pass_Value()+ 10) / 100f;
 
 
-        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, 3, pass_value));
+        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, pass_range:3, pass_value));
     }
 
     
