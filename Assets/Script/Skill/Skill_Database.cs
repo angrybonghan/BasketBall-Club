@@ -75,5 +75,12 @@ public class Skill_Database : MonoBehaviour
         return null;
     }
 
+    public bool Can_Act_Action(Player_Action action)
+    {
+        Skill skill = Get_Skill(action);
+        int turn = gm.current_turn;
+        return Can_Act_Action(action, turn, skill);
+
+    }
 
 }

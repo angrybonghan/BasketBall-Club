@@ -27,6 +27,8 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     [SerializeField] GameObject first_team_object;
     [SerializeField] GameObject second_team_object;
+    [SerializeField] Vector2 attack_team_position;
+    [SerializeField] Vector2 defence_team_position;
 
     public void Set_Skill_Player(Basketball_Player player) => skill_player = player;
 
@@ -77,16 +79,16 @@ public partial class Basketball_Game_Manager : MonoBehaviour
             attack_players = first_team_players;
             defence_players = second_team_players;
 
-            first_team_object.transform.position = new Vector2(0, 0);
-            second_team_object.transform.position = new Vector2(0, 2.5f);
+            first_team_object.transform.position = attack_team_position;
+            second_team_object.transform.position = defence_team_position;
         }
         else
         {
             attack_players = second_team_players;
             defence_players = first_team_players;
 
-            second_team_object.transform.position = new Vector2(0, 0);
-            first_team_object.transform.position = new Vector2(0, 2.5f);
+            second_team_object.transform.position = attack_team_position;
+            first_team_object.transform.position = defence_team_position;
         }
 
         Set_Attacker_And_Defender();

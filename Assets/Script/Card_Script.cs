@@ -15,7 +15,23 @@ public class Card_Script : MonoBehaviour
 
         this.action = action;
 
+        Set_Color();
+
         card_name.text = skill_database.Get_Name_Of_Skill(action);
+    }
+
+    private void Set_Color()
+    {
+        Skill_Database skill_database = Skill_Database.Get_Database();
+
+        if (skill_database.Can_Act_Action(action))
+        {
+            GetComponent<Image>().color = new Color(1, 1, 1);
+        }
+        else
+        {
+            GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+        }
     }
 
     public void Act()
@@ -31,6 +47,7 @@ public class Card_Script : MonoBehaviour
         button.onClick.AddListener(Click);
 
     }
+
 
     private void Click()
     {
