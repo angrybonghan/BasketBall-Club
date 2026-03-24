@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dribble_0: -572261773726323887
+      Dribble_1: 2944152579211226638
+      Dribble_2: 6012825786977503767
+      Dribble_3: 6887327885829475101
+      Dribble_4: -5687609960179832995
+      Dribble_5: -7118707439337494401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

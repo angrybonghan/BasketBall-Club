@@ -15,7 +15,7 @@ public partial class Basketball_Player : MonoBehaviour
     public bool Is_Attacker() => attacker;
     public bool Is_Defender() => !attacker;
 
-    public void Set_Attacker(bool attacker) => this.attacker = attacker;
+    public void Set_Attacker(bool attacker) => Set_Player_Attacker_Or_Defender(attacker);
 
 
     [Header("Stat")]
@@ -49,5 +49,32 @@ public partial class Basketball_Player : MonoBehaviour
         return standard_stat.rebound_value + additional_stat.rebound_value;
     }
 
+    private void Set_Player_Attacker_Or_Defender(bool attacker)
+    {
+        if (attacker)
+        {
+            Set_To_Attacker();
+            return;
+        }
+        Set_To_Defender();
+    }
 
+    private void Set_To_Attacker()
+    {
+
+        GetComponent<SpriteRenderer>().flipX = false;
+
+        GetComponent<SpriteRenderer>().color = new Color(1,1,1);
+
+        attacker = true;
+    }
+
+    private void Set_To_Defender()
+    {
+        attacker = false;
+
+        GetComponent<SpriteRenderer>().flipX = true;
+
+        GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f);
+    }
 }

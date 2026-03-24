@@ -26,7 +26,7 @@ public partial class Basketball_Player : MonoBehaviour
             return;
         }
 
-        GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
     }
 
     private void Update()
@@ -51,6 +51,10 @@ public partial class Basketball_Player : MonoBehaviour
         gm.Delete_Player_Card_UI();
         Show_Player_Card();
     }
+
+
+
+
 
 }
 

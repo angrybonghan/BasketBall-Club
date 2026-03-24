@@ -27,8 +27,8 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     [SerializeField] GameObject first_team_object;
     [SerializeField] GameObject second_team_object;
-    [SerializeField] Vector2 attack_team_position;
-    [SerializeField] Vector2 defence_team_position;
+    [SerializeField] Vector3 attack_team_position;
+    [SerializeField] Vector3 defence_team_position;
 
     public void Set_Skill_Player(Basketball_Player player) => skill_player = player;
 

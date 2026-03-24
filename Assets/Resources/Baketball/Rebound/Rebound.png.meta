@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Rebound_0: 4150088245714118910
+      Rebound_1: -3271360253499119002
+      Rebound_2: -3804284553660900020
+      Rebound_3: 5524364120680083827
+      Rebound_4: -6415363043261178650
+      Rebound_5: 1566267755300749148
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
