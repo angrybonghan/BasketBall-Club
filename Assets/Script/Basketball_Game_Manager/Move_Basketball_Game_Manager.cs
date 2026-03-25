@@ -25,11 +25,13 @@ public partial class Basketball_Game_Manager : MonoBehaviour
             Move_Player_Right(player_index + i);
         }
         attack_players[player_index + move_range] = player;
+        attack_players[player_index + move_range].Move_Animation();
     }
 
     private void Move_Player_Right(int player_index)
     {
         attack_players[player_index] = attack_players[player_index + 1];
+        attack_players[player_index].Move_Animation();
     }
 
     private void Move_Left(Basketball_Player player, int move_range)
@@ -41,12 +43,13 @@ public partial class Basketball_Game_Manager : MonoBehaviour
             Move_Player_Left(player_index -i);
         }
         attack_players[player_index - move_range] = player;
+        attack_players[player_index - move_range].Move_Animation();
     }
 
     private void Move_Player_Left(int player_index)
     {
         attack_players[player_index ] = attack_players[player_index - 1];
-
+        attack_players[player_index].Move_Animation();
     }
 
 

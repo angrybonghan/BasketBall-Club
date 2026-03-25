@@ -9,7 +9,8 @@ public class Calm_Pass_Skill : Skill
     public override Player_Action Get_Action() => Player_Action.Calm_Pass;
 
     public override int Get_Value() => 4;
-    
+
+    public override string Get_Animation_Type() => "pass";
 
     public override byte Get_Position_Query()
     {

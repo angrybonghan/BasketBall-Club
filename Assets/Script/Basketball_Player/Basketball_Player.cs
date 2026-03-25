@@ -29,6 +29,12 @@ public partial class Basketball_Player : MonoBehaviour
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
     }
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        
+    }
+
     private void Update()
     {
         Set_Color();

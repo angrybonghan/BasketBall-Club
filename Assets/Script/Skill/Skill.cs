@@ -12,6 +12,8 @@ public abstract class Skill : MonoBehaviour
 
     public abstract byte Get_Position_Query();
 
+    public abstract string Get_Animation_Type();
+
     public bool Get_Position_By_Index(int index){
         byte position_query = Get_Position_Query(); 
         while (index > 0)

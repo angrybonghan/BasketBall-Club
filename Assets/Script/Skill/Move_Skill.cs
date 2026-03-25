@@ -10,6 +10,8 @@ public class Move_Skill : Skill
 
     public override int Get_Value() => 2;
 
+    public override string Get_Animation_Type() => "move";
+
     public override byte Get_Position_Query()
     {
         if (position_query == 0)

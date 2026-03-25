@@ -126,6 +126,9 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     public IEnumerator Shoot_Coroutine(Basketball_Player shooter,int shoot_score, float shoot_possibility)
     {
+        shooter.Shoot_Animation();
+
+        yield return new WaitForSeconds(2);
 
         bool success = Check_Shoot_Success(shoot_possibility);
         shooter.Set_On_Ball(false);

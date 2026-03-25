@@ -9,6 +9,8 @@ public class Calm_Shoot_Skill : Skill
 
     public override int Get_Value() => 12;
 
+    public override string Get_Animation_Type() => "shoot";
+
     public override byte Get_Position_Query()
     {
         if (position_query == 0)

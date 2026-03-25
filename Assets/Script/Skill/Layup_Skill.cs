@@ -9,6 +9,8 @@ public class Layup_Skill : Skill
 
     public override int Get_Value() => 5;
 
+    public override string Get_Animation_Type() => "shoot";
+
     public override byte Get_Position_Query()
     {
         if (position_query == 0)

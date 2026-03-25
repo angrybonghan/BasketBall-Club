@@ -9,7 +9,9 @@ public class LeaderShip_Skill : Skill
     public override Player_Action Get_Action() => Player_Action.Leadership;
 
     public override int Get_Value() => 1;
-    
+
+    public override string Get_Animation_Type() => "move";
+   
 
     public override byte Get_Position_Query()
     {

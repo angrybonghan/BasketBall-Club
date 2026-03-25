@@ -10,7 +10,10 @@ public partial class Basketball_Player : MonoBehaviour
 
     public bool Off_Ball() => !on_ball;
 
-    public void Set_On_Ball(bool on_ball) => this.on_ball = on_ball;
+    public void Set_On_Ball(bool on_ball) {
+        Set_Ball_Condition_Animation(on_ball);
+        this.on_ball = on_ball;
+    }
 
     public bool Is_Attacker() => attacker;
     public bool Is_Defender() => !attacker;
