@@ -7,13 +7,15 @@ public class Main_UI_Manager : MonoBehaviour
     
 
     [SerializeField] private TMP_Text turn_text; 
-    [SerializeField] private TMP_Text score_text; 
+    [SerializeField] private TMP_Text first_score_text; 
+    [SerializeField] private TMP_Text second_score_text; 
     
 
     // Update is called once per frame
     void Update()
     {
         turn_text.text = gm.current_turn.ToString();
-        score_text.text = gm.score.ToString();
+        first_score_text.text = gm.first_team.score.ToString();
+        second_score_text.text = gm.second_team.score.ToString();
     }
 }

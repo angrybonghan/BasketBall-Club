@@ -7,6 +7,8 @@ public class Shoot_Skill : Skill
 
     public override string Get_Name() => "shoot";
 
+    public override bool Is_On_Ball_Skill() => true;
+
     public override int Get_Value() => 0;
 
     public override string Get_Animation_Type() => "shoot";

@@ -5,6 +5,7 @@ using System;
 public partial class Basketball_Player : MonoBehaviour
 {
     private Basketball_Game_Manager gm => Basketball_Game_Manager.Get_Game_Manager();
+    public Team team;
 
     public void Set_Name(string name)
     {

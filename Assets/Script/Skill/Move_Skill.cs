@@ -8,6 +8,9 @@ public class Move_Skill : Skill
 
     public override string Get_Name() => "move";
 
+    public override bool Is_On_Ball_Skill() => false;
+    
+
     public override int Get_Value() => 2;
 
     public override string Get_Animation_Type() => "move";

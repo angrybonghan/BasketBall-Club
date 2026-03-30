@@ -280,6 +280,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f17b8861a01eb45a5c2d0bf8f04db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team:
+    players: []
+    basic_player_position: []
+    score: 0
+    is_attack: 0
+    team_object: {fileID: 0}
+    players_prefeb: []
   on_ball: 0
   attacker: 0
   select_mode: 0
@@ -293,8 +300,7 @@ MonoBehaviour:
     rebound_value: 0
     shoot_value: 0
     score_value: 0
-  on_ball_actions: 020000000300000004000000050000000600000007000000
-  off_ball_actions: 0100000008000000
+  actions: 0100000002000000030000000400000005000000060000000700000008000000
   action_card_prefeb: {fileID: 4791810646826894256, guid: e191bbcfdeea0274886ccc56cb5257d3, type: 3}
 --- !u!114 &6437654351654718809
 MonoBehaviour:

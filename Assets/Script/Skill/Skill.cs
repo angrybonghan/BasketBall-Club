@@ -8,6 +8,8 @@ public abstract class Skill : MonoBehaviour
 
     public abstract int Get_Value();
 
+    public abstract bool Is_On_Ball_Skill();
+
     public abstract string Get_Name();
 
     public abstract byte Get_Position_Query();
@@ -45,5 +47,14 @@ public abstract class Skill : MonoBehaviour
 
     public abstract IEnumerator Act();
 
+    public bool Can_Skill_Use(Basketball_Player player)
+    {
+        bool is_turn_enough = gm.current_turn >= Get_Value();
+        bool is_position_right = Get_Position_By_Index(gm.Get_Index_Of_Player(player));
+        bool is_same_situation = Is_On_Ball_Skill() == player.On_Ball();
+
+        return is_turn_enough && is_position_right && is_same_situation;
+
+    }
 }
 

@@ -8,6 +8,8 @@ public class Pass_Skill : Skill
 
     public override string Get_Name() => "pass";
 
+    public override bool Is_On_Ball_Skill() => true;
+
     public override int Get_Value() => 4;
 
     public override string Get_Animation_Type() => "pass";

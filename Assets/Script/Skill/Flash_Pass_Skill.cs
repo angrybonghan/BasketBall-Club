@@ -7,6 +7,8 @@ public class Flash_Pass_Skill : Skill
 
     public override Player_Action Get_Action() => Player_Action.Flash_Pass;
 
+    public override bool Is_On_Ball_Skill() => true;
+
     public override int Get_Value() => 4;
 
     public override string Get_Animation_Type() => "pass";

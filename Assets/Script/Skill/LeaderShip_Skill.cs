@@ -8,6 +8,8 @@ public class LeaderShip_Skill : Skill
 
     public override Player_Action Get_Action() => Player_Action.Leadership;
 
+    public override bool Is_On_Ball_Skill() => false;
+
     public override int Get_Value() => 1;
 
     public override string Get_Animation_Type() => "move";
@@ -23,7 +25,7 @@ public class LeaderShip_Skill : Skill
 
     public override IEnumerator Act()
     {
-        List<Basketball_Player> attack_players = gm.attack_players;
+        List<Basketball_Player> attack_players = gm.attack_team.players;
         foreach (var player in attack_players)
         {
             player.additional_stat.score_value += 1;

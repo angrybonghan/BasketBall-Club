@@ -7,6 +7,10 @@ public class Layup_Skill : Skill
 
     public override Player_Action Get_Action() => Player_Action.Layup;
 
+    public override bool Is_On_Ball_Skill() => true;
+    
+
+
     public override int Get_Value() => 5;
 
     public override string Get_Animation_Type() => "shoot";
@@ -22,6 +26,7 @@ public class Layup_Skill : Skill
     public override IEnumerator Act()
     {
         Basketball_Player on_ball_player = gm.Get_On_Ball_Player();
+        Team team = on_ball_player.team;
         int shoot_score = 2 + on_ball_player.Get_Score_Value();
         float shoot_possibility = (on_ball_player.Get_Shoot_Value() + 10) / 100f;
         int on_ball_player_index = gm.Get_Index_Of_Player(on_ball_player);

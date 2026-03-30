@@ -26,8 +26,7 @@ public partial class Basketball_Player : MonoBehaviour
 
     public Player_Stat additional_stat;
 
-    public List<Player_Action> on_ball_actions;
-    public List<Player_Action> off_ball_actions;
+    public List<Player_Action> actions;
 
     public GameObject action_card_prefeb;
 

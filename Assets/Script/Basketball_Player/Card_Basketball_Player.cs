@@ -8,23 +8,25 @@ public partial class Basketball_Player : MonoBehaviour
         gm.Delete_Player_Card_UI();
         gm.Set_Skill_Player(this);
 
-        if (on_ball)
-        {
-            Show_On_Ball_Card();
-            return;
-        }
-        Show_Off_Ball_Card();
+        Show_Card();
+
     }
+    
 
-    private void Show_On_Ball_Card() => Show_Card(on_ball_actions);
 
-    private void Show_Off_Ball_Card() => Show_Card(off_ball_actions);
-
-    private void Show_Card(List<Player_Action> player_actions)
+    private void Show_Card()
     {
 
-        foreach (var action in player_actions)
+        Skill_Database database = Skill_Database.Get_Database(); 
+        foreach (var action in actions)
         {
+            Skill skill = database.Get_Skill(action);
+            if (skill.Can_Skill_Use(this) == false)
+            {
+                continue;
+            }
+            
+            
             GameObject card = Instantiate(action_card_prefeb, gm.player_hand_ui_object.transform);
             Card_Script card_script = card.GetComponent<Card_Script>();
 
