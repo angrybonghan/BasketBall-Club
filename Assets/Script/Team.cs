@@ -1,15 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 [Serializable]
 public class Team
 {
     public List<Basketball_Player> players;
     public List<Basketball_Player> basic_player_position;
+    public Basketball_Game_Manager gm => Basketball_Game_Manager.Get_Game_Manager();
     public int score;
     public bool is_attack;
+    public bool is_ai;
     public GameObject team_object;
+    public List<Order> order_list;
     [SerializeField] List<GameObject> players_prefeb;
 
 
@@ -20,6 +24,7 @@ public class Team
         {
             player.Set_Attacker(true);
         }
+        is_attack = true;
 
     }
 
@@ -29,6 +34,7 @@ public class Team
         {
             player.Set_Attacker(false);
         }
+        is_attack = false;
 
     }
     
@@ -64,4 +70,43 @@ public class Team
         }
     }
 
+    public IEnumerator Act_Order_List()
+    {
+
+        while (true)
+        {
+            Basketball_Player player = gm.Get_On_Ball_Player();
+
+
+            yield return gm.StartCoroutine(player.Action_By_Ai());
+
+            if (is_attack == false)
+                break;
+        }
+
+        Debug.Log("finish");
+
+    }
+
+    private void Act_Skill_By_Order(Order order)
+    {
+        Basketball_Player player = gm.Get_Player_By_Index(order.player_index, this);
+        if (player.On_Ball())
+        {
+
+        }
+
+    }
+
 }
+
+
+
+public class Order
+{
+    public int player_index;
+    public int player_action_index;
+    public int follower_index;
+
+}
+

@@ -37,6 +37,12 @@ public class Layup_Skill : Skill
         yield return StartCoroutine(gm.Shoot_Coroutine(on_ball_player, shoot_score, shoot_possibility));
     }
 
+    public override IEnumerator Act_By_Ai(int target_index)
+    {
+        yield return StartCoroutine(Act());
+    }
+
+
     private bool Is_Not_Player_Rightmost(int on_ball_player_index)
     {
 

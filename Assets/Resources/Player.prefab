@@ -285,8 +285,31 @@ MonoBehaviour:
     basic_player_position: []
     score: 0
     is_attack: 0
+    is_ai: 0
     team_object: {fileID: 0}
     players_prefeb: []
+  skill_weights:
+  - player_action: 2
+    weight: 2
+    target_player_index: 0
+  - player_action: 3
+    weight: 2
+    target_player_index: -1
+  - player_action: 4
+    weight: 2
+    target_player_index: -1
+  - player_action: 5
+    weight: 2
+    target_player_index: 0
+  - player_action: 6
+    weight: 2
+    target_player_index: 0
+  - player_action: 7
+    weight: 2
+    target_player_index: -1
+  - player_action: 8
+    weight: 2
+    target_player_index: 0
   on_ball: 0
   attacker: 0
   select_mode: 0

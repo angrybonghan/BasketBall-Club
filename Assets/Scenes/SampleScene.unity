@@ -949,6 +949,7 @@ MonoBehaviour:
     basic_player_position: []
     score: 0
     is_attack: 0
+    is_ai: 0
     team_object: {fileID: 77002560}
     players_prefeb:
     - {fileID: 7662087409725592188, guid: 2c6feb8797d2d9c40a91b7b6e158b532, type: 3}
@@ -961,6 +962,7 @@ MonoBehaviour:
     basic_player_position: []
     score: 0
     is_attack: 0
+    is_ai: 1
     team_object: {fileID: 1395859842}
     players_prefeb:
     - {fileID: 7662087409725592188, guid: 2c6feb8797d2d9c40a91b7b6e158b532, type: 3}
@@ -973,6 +975,7 @@ MonoBehaviour:
     basic_player_position: []
     score: 0
     is_attack: 0
+    is_ai: 0
     team_object: {fileID: 0}
     players_prefeb: []
   defence_team:
@@ -980,6 +983,7 @@ MonoBehaviour:
     basic_player_position: []
     score: 0
     is_attack: 0
+    is_ai: 0
     team_object: {fileID: 0}
     players_prefeb: []
   current_turn: 24

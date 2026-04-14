@@ -33,6 +33,18 @@ public class Pass_Skill : Skill
         yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, pass_range:5, pass_value));
     }
 
+    public override IEnumerator Act_By_Ai(int target_index)
+    {
+        Basketball_Player on_ball_player = gm.Get_On_Ball_Player();
+        float pass_value = on_ball_player.Get_Pass_Value() / 100f;
+        Basketball_Player target_player = gm.Get_Player_By_Index_In_Attacker(target_index);
+
+        yield return new WaitForSeconds(1);
+
+        StartCoroutine(gm.Pass(on_ball_player, target_player));
+
+    }
+
 
 
 }

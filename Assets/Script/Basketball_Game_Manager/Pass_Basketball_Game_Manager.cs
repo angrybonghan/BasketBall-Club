@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public partial class Basketball_Game_Manager : MonoBehaviour
 {
-    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player)
+    public IEnumerator Pass(Basketball_Player passing_player, Basketball_Player passed_player,System.Action<Basketball_Player> action = null)
     {
 
         passing_player.Pass_Animation();
@@ -13,13 +13,16 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         passing_player.Set_On_Ball(false);
 
         passed_player.Set_On_Ball(true);
+
+        Check_Action_And_Do_Action(passed_player, action);
+        yield return new WaitForSeconds(1f);
     }
 
-    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible)
+    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible,System.Action<Basketball_Player> action = null)
     {
         if (Is_Pass_Success( pass_possible))
         {
-            Pass(passing_player, passed_player);
+            StartCoroutine(Pass(passing_player, passed_player));
             return;
         }
 
@@ -43,9 +46,8 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         yield return StartCoroutine(Select_Player(passable_players , (result) => target_player = result));
 
 
-        Check_Action_And_Do_Action(target_player, action_to_target_player);
 
-        Pass(passing_player, target_player,pass_possible);
+        Pass(passing_player, target_player,pass_possible , action_to_target_player);
     }
 
     private void Check_Action_And_Do_Action(Basketball_Player target_player, System.Action<Basketball_Player> action_to_target_player)

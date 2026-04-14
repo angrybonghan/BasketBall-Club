@@ -6,7 +6,6 @@ public partial class Basketball_Player : MonoBehaviour
     public void Show_Player_Card()
     {
         gm.Delete_Player_Card_UI();
-        gm.Set_Skill_Player(this);
 
         Show_Card();
 
@@ -31,7 +30,7 @@ public partial class Basketball_Player : MonoBehaviour
             Card_Script card_script = card.GetComponent<Card_Script>();
 
 
-            card_script.Set(action);
+            card_script.Set(action, this);
         }
     }
 

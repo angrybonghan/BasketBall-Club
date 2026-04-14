@@ -73,6 +73,8 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         Set_Attacker_And_Defender();
         Set_Ball();
         Set_Player_Stat_Clear();
+        if (attack_team.is_ai)
+            StartCoroutine(attack_team.Act_Order_List());
     }
 
     private void Set_Ball()

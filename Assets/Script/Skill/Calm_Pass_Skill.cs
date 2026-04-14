@@ -31,6 +31,17 @@ public class Calm_Pass_Skill : Skill
         yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, pass_range:3, pass_value));
     }
 
+    public override IEnumerator Act_By_Ai(int target_index)
+    {
+        Basketball_Player on_ball_player = gm.Get_On_Ball_Player();
+        Team team = on_ball_player.team;
+        float pass_value = (on_ball_player.Get_Pass_Value()+ 10) / 100f;
+        Basketball_Player target_player = gm.Get_Player_By_Index(target_index, team);
+
+        yield return new WaitForSeconds(1);
+
+        gm.Pass(on_ball_player, target_player, pass_value);
+    }
     
    
 }

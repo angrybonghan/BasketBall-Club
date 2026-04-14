@@ -36,5 +36,10 @@ public class LeaderShip_Skill : Skill
         yield break;
     }
 
+    public override IEnumerator Act_By_Ai(int target_index)
+    {
+        yield return StartCoroutine(Act());
+    }
+
 
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Skill_Database : MonoBehaviour
@@ -28,21 +29,26 @@ public class Skill_Database : MonoBehaviour
     }
 
 
-    public void Act_And_Calculate_Turn(Player_Action action)
+    public void Act_Skill(Player_Action action, Basketball_Player player)
     {
-        Skill[] skills = GetComponents<Skill>();
+        gm.Set_Skill_Player(player);
+        Skill skill = Get_Skill(action);
         ref int turn = ref gm.current_turn;
-
-        foreach (var skill in skills)
-        {
-            if (Can_Act_Action(action , turn , skill))
-            {
-                Act_Skill(skill);
-                
-                return;
-            }
-        }
+        if (Can_Act_Action(player, action, turn, skill))
+            Act_Skill(skill);
     }
+
+    public IEnumerator Act_Skill_By_Ai(Player_Action action, Basketball_Player player , int target_index)
+    {
+        gm.Set_Skill_Player(player);
+        Skill skill = Get_Skill(action);
+        int turn = gm.current_turn;
+        if (Can_Act_Action(player,action, turn, skill))
+            yield return StartCoroutine(Act_Skill_By_Ai(skill,target_index));
+
+    }
+
+    
 
     private void Act_Skill(Skill skill)
     {
@@ -52,14 +58,21 @@ public class Skill_Database : MonoBehaviour
         gm.Delete_Player_Card_UI();
         StartCoroutine(skill.Act());
     }
+
+    private IEnumerator Act_Skill_By_Ai(Skill skill, int target_index)
+    {
+        Team team = gm.attack_team;
+        yield return StartCoroutine(skill.Act_By_Ai(target_index));
+        if (team == gm.attack_team) 
+            gm.current_turn -= skill.Get_Value();
+    }
     
 
-    private bool Can_Act_Action(Player_Action action, int turn , Skill skill)
+    private bool Can_Act_Action(Basketball_Player player ,Player_Action action, int turn , Skill skill)
     {
-        Basketball_Player skill_player = gm.Get_Skill_Player();
         bool is_same_action = action == skill.Get_Action();
         bool is_turn_enough = turn >= skill.Get_Value();
-        bool is_position_right = skill.Get_Position_By_Index(gm.Get_Index_Of_Player(skill_player));
+        bool is_position_right = skill.Get_Position_By_Index(gm.Get_Index_Of_Player(player));
 
         return is_same_action && is_turn_enough && is_position_right;
     }
@@ -75,11 +88,11 @@ public class Skill_Database : MonoBehaviour
         return null;
     }
 
-    public bool Can_Act_Action(Player_Action action)
+    public bool Can_Act_Action(Basketball_Player player ,Player_Action action)
     {
         Skill skill = Get_Skill(action);
         int turn = gm.current_turn;
-        return Can_Act_Action(action, turn, skill);
+        return Can_Act_Action(player ,action, turn, skill);
 
     }
 

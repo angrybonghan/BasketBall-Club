@@ -7,13 +7,15 @@ public class Card_Script : MonoBehaviour
 
     [SerializeField] TMP_Text card_name;
     Player_Action action;
+    Basketball_Player player;
 
 
-    public void Set(Player_Action action)
+    public void Set(Player_Action action, Basketball_Player player)
     {
         Skill_Database skill_database = Skill_Database.Get_Database();
 
         this.action = action;
+        this.player = player;
 
         Set_Color();
 
@@ -24,7 +26,7 @@ public class Card_Script : MonoBehaviour
     {
         Skill_Database skill_database = Skill_Database.Get_Database();
 
-        if (skill_database.Can_Act_Action(action))
+        if (skill_database.Can_Act_Action(player, action))
         {
             GetComponent<Image>().color = new Color(1, 1, 1);
         }
@@ -38,7 +40,7 @@ public class Card_Script : MonoBehaviour
     {
         Skill_Database skill_database = Skill_Database.Get_Database();
 
-        skill_database.Act_And_Calculate_Turn(action);
+        skill_database.Act_Skill(action, player);
     }
 
     private void Start()

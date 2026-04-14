@@ -59,6 +59,23 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         return -1;
     }
 
+    public Basketball_Player Get_Player_By_Index(int index, Team team)
+    {
+        return team.players[index];
+    }
+
+    public Basketball_Player Get_Player_By_Index_In_Attacker(int index)
+    {
+
+        return Get_Player_By_Index(index , attack_team);
+    }
+
+    public Basketball_Player Get_Player_By_Index_In_Defence(int index)
+    {
+
+        return Get_Player_By_Index(index , defence_team);
+    }
+
     public List<Basketball_Player> Get_Near_Players(Basketball_Player player , int range)
     {
         Team team = player.team;

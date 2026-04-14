@@ -47,6 +47,8 @@ public abstract class Skill : MonoBehaviour
 
     public abstract IEnumerator Act();
 
+    public abstract IEnumerator Act_By_Ai(int target_index);
+
     public bool Can_Skill_Use(Basketball_Player player)
     {
         bool is_turn_enough = gm.current_turn >= Get_Value();

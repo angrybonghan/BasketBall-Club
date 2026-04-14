@@ -35,6 +35,12 @@ public class Shoot_Skill : Skill
     }
 
 
+    public override IEnumerator Act_By_Ai(int target_index)
+    {
+        yield return StartCoroutine(Act());
+    }
+
+
 
 
 }
