@@ -50,7 +50,7 @@ public partial class Basketball_Player : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (Is_Defender())
+        if (Is_Defender() || team.is_ai)
             return;
 
         if (select_mode)
