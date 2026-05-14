@@ -39,9 +39,7 @@ public class Pass_Skill : Skill
         float pass_value = on_ball_player.Get_Pass_Value() / 100f;
         Basketball_Player target_player = gm.Get_Player_By_Index_In_Attacker(target_index);
 
-        yield return new WaitForSeconds(1);
-
-        StartCoroutine(gm.Pass(on_ball_player, target_player));
+        yield return StartCoroutine(gm.Pass(on_ball_player, target_player));
 
     }
 

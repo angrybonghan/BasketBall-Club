@@ -12,6 +12,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
     public static Basketball_Game_Manager Get_Game_Manager() => script;
     public GameObject player_hand_ui_object;
     [HideInInspector] public List<Basketball_Player> all_players;
+    public GameObject goal_post;
 
     public Team first_team;
     public Team second_team;
@@ -106,7 +107,12 @@ public partial class Basketball_Game_Manager : MonoBehaviour
     {
         shooter.Shoot_Animation();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.3f);
+
+        float time;
+        Ball_Animation_Of_Shoot(shooter.transform.position + new Vector3(0.1f , 1f, 0), goal_post.transform.position, out time, 1080);
+
+        yield return new WaitForSeconds(time + 0.05f);
 
         bool success = Check_Shoot_Success(shoot_possibility);
         shooter.Set_On_Ball(false);
@@ -118,9 +124,8 @@ public partial class Basketball_Game_Manager : MonoBehaviour
             yield break;
         }
 
-        Rebound();
+        yield return StartCoroutine(Rebound_Coroutine());
 
-        yield return null;
 
     }
 

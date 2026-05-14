@@ -79,6 +79,7 @@ public class Team
 
 
             yield return gm.StartCoroutine(player.Action_By_Ai());
+            yield return new WaitForSeconds(0.3f);
 
             if (is_attack == false)
                 break;

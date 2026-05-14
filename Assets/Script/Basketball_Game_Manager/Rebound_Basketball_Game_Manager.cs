@@ -1,19 +1,40 @@
+using System.Collections;
 using UnityEngine;
 
 public partial class Basketball_Game_Manager : MonoBehaviour
 {
-    public void Rebound()
+
+    public IEnumerator Rebound_Coroutine()
     {
         Basketball_Player rebound_player = Get_Rebound_Player();
+        float time;
+        Ball_Animation_Of_Rebound(goal_post.transform.position, rebound_player.transform.position + new Vector3(0.1f, 1, 0), out time, 1080);
+        
+        yield return new WaitForSeconds(time);
+
+        Rebound(rebound_player);
+
+    }
+
+    public void Rebound(Basketball_Player rebound_player)
+    {
 
         if (rebound_player.Is_Attacker())
         {
-            current_turn = 16;
+            if (current_turn < 16)
+                current_turn = 16;
             rebound_player.Set_On_Ball(true);
             return;
         }
         Next_Round();
 
+    }
+
+    public void Rebound()
+    {
+        Basketball_Player rebound_player = Get_Rebound_Player();
+
+        Rebound(rebound_player);
     }
 
     private Basketball_Player Get_Rebound_Player()

@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,12 +112,12 @@ TextureImporter:
       name: RIm_0
       rect:
         serializedVersion: 2
-        x: 36
-        y: 99
-        width: 69
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 37
+        y: 100
+        width: 67
+        height: 98
+      alignment: 9
+      pivot: {x: 0.8, y: 0.58}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: RIm_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 0
-        width: 69
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 165
+        y: 100
+        width: 67
+        height: 98
+      alignment: 9
+      pivot: {x: 0.8, y: 0.58}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,12 +156,12 @@ TextureImporter:
       name: RIm_2
       rect:
         serializedVersion: 2
-        x: 164
-        y: 99
-        width: 69
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 37
+        y: 0
+        width: 67
+        height: 98
+      alignment: 9
+      pivot: {x: 0.8, y: 0.58}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: RIm_3
       rect:
         serializedVersion: 2
-        x: 164
+        x: 165
         y: 0
-        width: 69
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 67
+        height: 98
+      alignment: 9
+      pivot: {x: 0.8, y: 0.58}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: aaa3d0748183e7746bf770250b6acbe8
     internalID: 0
     vertices: []
     indices: 
@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RIm_0: -5312721925119660056
+      RIm_1: 5116598379570253319
+      RIm_2: 5428303146218866578
+      RIm_3: -7774498329585649735
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

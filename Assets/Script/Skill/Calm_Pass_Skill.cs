@@ -40,7 +40,7 @@ public class Calm_Pass_Skill : Skill
 
         yield return new WaitForSeconds(1);
 
-        gm.Pass(on_ball_player, target_player, pass_value);
+        gm.Pass(on_ball_player, target_player, pass_possible:pass_value);
     }
     
    

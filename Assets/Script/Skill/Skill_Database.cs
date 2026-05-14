@@ -65,6 +65,7 @@ public class Skill_Database : MonoBehaviour
         yield return StartCoroutine(skill.Act_By_Ai(target_index));
         if (team == gm.attack_team) 
             gm.current_turn -= skill.Get_Value();
+        yield return null;
     }
     
 

@@ -43,7 +43,7 @@ public class Flash_Pass_Skill : Skill
 
         yield return new WaitForSeconds(1);
 
-        StartCoroutine(gm.Pass(on_ball_player, target_player, (target) =>
+        StartCoroutine(gm.Pass(on_ball_player, target_player, action:(target) =>
         {
             target_player.additional_stat.score_value += 1;
             target_player.additional_stat.shoot_value += 10;

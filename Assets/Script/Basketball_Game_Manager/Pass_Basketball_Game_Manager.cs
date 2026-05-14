@@ -5,24 +5,28 @@ using System.Collections.Generic;
 
 public partial class Basketball_Game_Manager : MonoBehaviour
 {
-    public IEnumerator Pass(Basketball_Player passing_player, Basketball_Player passed_player,System.Action<Basketball_Player> action = null)
+    public IEnumerator Pass(Basketball_Player passing_player, Basketball_Player passed_player, float duration_time = 0.3f , float spin_degree = 1080,System.Action<Basketball_Player> action = null)
     {
+    
+
+        Ball_Animation_Of_Pass(passing_player.transform.position + new Vector3(0,0.7f,0), passed_player.transform.position + new Vector3(0,0.7f,0), duration_time , spin_degree);
 
         passing_player.Pass_Animation();
 
         passing_player.Set_On_Ball(false);
 
-        passed_player.Set_On_Ball(true);
-
         Check_Action_And_Do_Action(passed_player, action);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(duration_time);
+
+
+        passed_player.Set_On_Ball(true);
     }
 
-    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible,System.Action<Basketball_Player> action = null)
+    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible, float duration_time = 0.3f , float spin_degree = 1080,System.Action<Basketball_Player> action = null)
     {
         if (Is_Pass_Success( pass_possible))
         {
-            StartCoroutine(Pass(passing_player, passed_player));
+            StartCoroutine(Pass(passing_player, passed_player,duration_time:duration_time , spin_degree));
             return;
         }
 
@@ -47,7 +51,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
 
 
-        Pass(passing_player, target_player,pass_possible , action_to_target_player);
+        Pass(passing_player, target_player,pass_possible:pass_possible , action:action_to_target_player);
     }
 
     private void Check_Action_And_Do_Action(Basketball_Player target_player, System.Action<Basketball_Player> action_to_target_player)
