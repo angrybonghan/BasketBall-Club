@@ -7,20 +7,25 @@ public partial class Basketball_Game_Manager : MonoBehaviour
     [SerializeField] float ball_gravity;
 
 
-    public void Ball_Animation_Of_Pass(Vector2 start_position , Vector2 end_position , float time , float spin_degree)
+    public IEnumerator Ball_Animation_Of_Pass(Vector2 start_position , Vector2 end_position  , float ball_speed_degree  , float spin_degree )
     {
         GameObject ball = Instantiate(ball_prefeb);
 
-        StartCoroutine(Ball_Direct_Move(ball, start_position, end_position, time , spin_degree));
-        Destroy(ball, time + 0.05f);
-        
+
+        yield return StartCoroutine(Ball_Direct_Move(ball, start_position, end_position  , ball_speed_degree , spin_degree));
+
+        Destroy(ball);
+
+        yield break;
+
     }
 
-    private IEnumerator Ball_Direct_Move(GameObject ball , Vector2 start_position , Vector2 end_position , float duration_time , float spin_degree)
+    private IEnumerator Ball_Direct_Move(GameObject ball , Vector2 start_position , Vector2 end_position   , float ball_speed_degree, float spin_degree)
     {
         ball.transform.position = Utility.Vector3(start_position, 0);
         float time = 0;
         Vector2 distance = end_position - start_position;
+        float duration_time = (Vector2.Distance(start_position, end_position)) / ball_speed_degree;
 
         while (time <= duration_time)
         {
@@ -36,25 +41,29 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     }
 
+    public IEnumerator Ball_Animation_Of_Shoot(Vector2 start_position, Vector2 end_position, float ball_speed_degree, float spin_degree) { 
+        
+        yield return StartCoroutine(Ball_Animation_Of_Parabola(start_position, end_position, ball_speed_degree, spin_degree)); 
 
-    public void Ball_Animation_Of_Parabola(Vector2 start_position, Vector2 end_position, out float time, float spin_degree)
+    }
+
+    public IEnumerator Ball_Animation_Of_Rebound(Vector2 start_position, Vector2 end_position, float ball_speed_degree, float spin_degree) { 
+        
+        yield return StartCoroutine(Ball_Animation_Of_Parabola(start_position, end_position, ball_speed_degree, spin_degree)); 
+
+    }
+
+    public IEnumerator Ball_Animation_Of_Parabola(Vector2 start_position, Vector2 end_position, float ball_speed_degree, float spin_degree)
     {
         GameObject ball = Instantiate(ball_prefeb);
         float a, b, c;
-        float duration_time = Mathf.Abs((end_position.x - start_position.x)/6);
-        time = duration_time;
+        float duration_time = Mathf.Abs((end_position.x - start_position.x)/ball_speed_degree);
         Get_Quadratic_Function_Of_Shoot(start_position, end_position, out a, out b, out c);
 
-        StartCoroutine(Ball_Parabola_Move(ball ,start_position, end_position, a, b, c, duration_time, spin_degree));
+        yield return StartCoroutine(Ball_Parabola_Move(ball ,start_position, end_position, a, b, c, duration_time, spin_degree));
 
-        Destroy(ball, duration_time + 0.05f);
+        Destroy(ball);
     }
-
-    public void Ball_Animation_Of_Shoot(Vector2 start_position, Vector2 end_position, out float time, float spin_degree) => Ball_Animation_Of_Parabola(start_position, end_position, out time, spin_degree);
-
-
-    public void Ball_Animation_Of_Rebound(Vector2 start_position, Vector2 end_position, out float time, float spin_degree) => Ball_Animation_Of_Parabola(start_position, end_position, out time, spin_degree);
-    
 
     private IEnumerator Ball_Parabola_Move(GameObject ball, Vector2 start_position, Vector2 end_position, float a, float b, float c, float duration_time, float spin_degree)
     {
@@ -97,5 +106,6 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         c = -(ball_gravity) * (peek_position_x) * (peek_position_x) + peek_position_y;
     }
 
+    
     
 }

@@ -25,6 +25,8 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     [SerializeField] Vector3 attack_team_position;
     [SerializeField] Vector3 defence_team_position;
+    public float default_ball_speed_degree;
+    public  float default_ball_spin_degree;
 
     public void Set_Skill_Player(Basketball_Player player) => skill_player = player;
 
@@ -107,12 +109,10 @@ public partial class Basketball_Game_Manager : MonoBehaviour
     {
         shooter.Shoot_Animation();
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
 
-        float time;
-        Ball_Animation_Of_Shoot(shooter.transform.position + new Vector3(0.1f , 1f, 0), goal_post.transform.position, out time, 1080);
+        yield return StartCoroutine(Ball_Animation_Of_Shoot(shooter.transform.position + new Vector3(0.1f , 1f, 0), goal_post.transform.position, default_ball_speed_degree, default_ball_spin_degree));
 
-        yield return new WaitForSeconds(time + 0.05f);
 
         bool success = Check_Shoot_Success(shoot_possibility);
         shooter.Set_On_Ball(false);
@@ -120,6 +120,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         if (success)
         {
             shooter.team.score += shoot_score;
+            yield return new WaitForSeconds(1);
             Next_Round();
             yield break;
         }

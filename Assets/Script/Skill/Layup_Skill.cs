@@ -32,7 +32,7 @@ public class Layup_Skill : Skill
         int on_ball_player_index = gm.Get_Index_Of_Player(on_ball_player);
 
         if (Is_Not_Player_Rightmost(on_ball_player_index))
-            gm.Move(on_ball_player, 1);
+            yield return StartCoroutine(gm.Move(on_ball_player, 1));
 
         yield return StartCoroutine(gm.Shoot_Coroutine(on_ball_player, shoot_score, shoot_possibility));
     }

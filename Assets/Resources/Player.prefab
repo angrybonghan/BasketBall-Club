@@ -280,6 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f17b8861a01eb45a5c2d0bf8f04db3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_move_speed: 6
   team:
     players: []
     basic_player_position: []

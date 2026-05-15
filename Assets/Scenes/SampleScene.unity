@@ -857,6 +857,8 @@ MonoBehaviour:
   round: 0
   attack_team_position: {x: 0, y: 0, z: 0}
   defence_team_position: {x: 1, y: 0.5, z: 1}
+  default_ball_speed_degree: 10
+  default_ball_spin_degree: 1080
 --- !u!4 &1054744724
 Transform:
   m_ObjectHideFlags: 0

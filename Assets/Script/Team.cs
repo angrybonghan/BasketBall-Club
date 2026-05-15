@@ -13,7 +13,6 @@ public class Team
     public bool is_attack;
     public bool is_ai;
     public GameObject team_object;
-    public List<Order> order_list;
     [SerializeField] List<GameObject> players_prefeb;
 
 
@@ -49,8 +48,6 @@ public class Team
             Set_New_Player(player, i);
 
             result.Add(player);
-            players.Add(player);
-            basic_player_position.Add(player);
         }
         return result;
     }
@@ -60,14 +57,18 @@ public class Team
         player.Set_Name((i + 1).ToString());
         player.transform.localPosition = new Vector2((i-2)*2.5f , 0);
         player.team = this;
+        players.Add(player);
+        basic_player_position.Add(player);
     }
 
-    public void Update_Player_Display()
+    public IEnumerator Update_Player_Display()
     {
+        yield return null;
         for (int i = 0; i < players.Count; i++)
         {
-            players[i].transform.localPosition = new Vector2((i - 2) * 2.5f, 0);
+            gm.StartCoroutine(players[i].Player_Move_Animation(players[i].transform.localPosition, new Vector2((i - 2) * 2.5f, 0)));
         }
+        
     }
 
     public IEnumerator Act_Order_List()
@@ -89,25 +90,8 @@ public class Team
 
     }
 
-    private void Act_Skill_By_Order(Order order)
-    {
-        Basketball_Player player = gm.Get_Player_By_Index(order.player_index, this);
-        if (player.On_Ball())
-        {
-
-        }
-
-    }
 
 }
 
 
-
-public class Order
-{
-    public int player_index;
-    public int player_action_index;
-    public int follower_index;
-
-}
 

@@ -37,20 +37,19 @@ public class Move_Skill : Skill
 
         int move_range = target_player_index - main_player_index;
 
-        gm.Move(main_player, move_range);
+        yield return StartCoroutine(gm.Move(main_player, move_range));
 
     }
 
     public override IEnumerator Act_By_Ai(int target_index)
     {
-        yield return new WaitForSeconds(1); 
         Basketball_Player main_player = gm.Get_Skill_Player();
 
         int main_player_index = gm.Get_Index_Of_Player(main_player);
 
         int move_range = target_index - main_player_index;
 
-        gm.Move(main_player, move_range);
+        yield return StartCoroutine(gm.Move(main_player, move_range));
     }
 
 }

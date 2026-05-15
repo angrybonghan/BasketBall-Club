@@ -5,29 +5,31 @@ using System.Collections.Generic;
 
 public partial class Basketball_Game_Manager : MonoBehaviour
 {
-    public IEnumerator Pass(Basketball_Player passing_player, Basketball_Player passed_player, float duration_time = 0.3f , float spin_degree = 1080,System.Action<Basketball_Player> action = null)
+    public IEnumerator Pass(Basketball_Player passing_player, Basketball_Player passed_player, float speed_degree, float spin_degree,System.Action<Basketball_Player> action = null)
     {
     
 
-        Ball_Animation_Of_Pass(passing_player.transform.position + new Vector3(0,0.7f,0), passed_player.transform.position + new Vector3(0,0.7f,0), duration_time , spin_degree);
 
         passing_player.Pass_Animation();
 
         passing_player.Set_On_Ball(false);
 
+        yield return StartCoroutine(Ball_Animation_Of_Pass(passing_player.transform.position + new Vector3(0,0.7f,0), passed_player.transform.position + new Vector3(0,0.7f,0), speed_degree  , spin_degree));
+
         Check_Action_And_Do_Action(passed_player, action);
-        yield return new WaitForSeconds(duration_time);
 
 
         passed_player.Set_On_Ball(true);
+        yield return null;
     }
 
-    public void Pass(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible, float duration_time = 0.3f , float spin_degree = 1080,System.Action<Basketball_Player> action = null)
+    public IEnumerator Check_Pass_Success_And_Act(Basketball_Player passing_player, Basketball_Player passed_player,float pass_possible, float speed_degree , float spin_degree,System.Action<Basketball_Player> action = null)
     {
         if (Is_Pass_Success( pass_possible))
         {
-            StartCoroutine(Pass(passing_player, passed_player,duration_time:duration_time , spin_degree));
-            return;
+            yield return StartCoroutine(Pass(passing_player, passed_player,speed_degree , spin_degree));
+            yield return null;
+            yield break;
         }
 
         Next_Round();
@@ -41,7 +43,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
     }
 
-    public IEnumerator Pass_Coroutine(Basketball_Player passing_player , int pass_range, float pass_possible, System.Action<Basketball_Player> action_to_target_player = null)
+    public IEnumerator Player_Pass_Coroutine(Basketball_Player passing_player , int pass_range, float pass_possible,float speed_degree , float spin_degree, System.Action<Basketball_Player> action_to_target_player = null)
     {
         List<Basketball_Player> passable_players = Get_Near_Players(passing_player,pass_range);
 
@@ -51,7 +53,9 @@ public partial class Basketball_Game_Manager : MonoBehaviour
 
 
 
-        Pass(passing_player, target_player,pass_possible:pass_possible , action:action_to_target_player);
+        yield return Check_Pass_Success_And_Act(passing_player, target_player,pass_possible ,speed_degree, spin_degree, action_to_target_player);
+
+        yield break;
     }
 
     private void Check_Action_And_Do_Action(Basketball_Player target_player, System.Action<Basketball_Player> action_to_target_player)

@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public partial class Basketball_Game_Manager : MonoBehaviour
 {
-    public void Move(Basketball_Player player , int move_range)
+    public IEnumerator Move(Basketball_Player player , int move_range)
     {
         Team team = player.team;
         int player_index = Get_Index_Of_Player(player);
@@ -14,7 +15,7 @@ public partial class Basketball_Game_Manager : MonoBehaviour
         else
             Move_Left(player, -move_range);
 
-        team.Update_Player_Display();
+        yield return StartCoroutine(team.Update_Player_Display());
         
     }
 

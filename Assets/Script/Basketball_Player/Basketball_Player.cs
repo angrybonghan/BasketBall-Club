@@ -84,6 +84,14 @@ public partial class Basketball_Player : MonoBehaviour
         Skill_Database skill_database = Skill_Database.Get_Database();
         Skill_Weight skill_weight = Get_Skill_Weight_By_Random();
         int target_player_index = 0;
+        if (skill_weight == null)
+        {
+            Debug.Log("no_weight");
+            yield return new WaitForSeconds(1);
+            gm.Next_Round();
+
+            yield break;
+        }
 
         if (skill_weight.target_player_index == -1)
         {

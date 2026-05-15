@@ -30,7 +30,7 @@ public class Pass_Skill : Skill
         float pass_value = on_ball_player.Get_Pass_Value() / 100f;
 
 
-        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, pass_range:5, pass_value));
+        yield return StartCoroutine(gm.Player_Pass_Coroutine(on_ball_player, pass_range:5, pass_value , gm.default_ball_speed_degree , gm.default_ball_spin_degree));
     }
 
     public override IEnumerator Act_By_Ai(int target_index)
@@ -39,7 +39,7 @@ public class Pass_Skill : Skill
         float pass_value = on_ball_player.Get_Pass_Value() / 100f;
         Basketball_Player target_player = gm.Get_Player_By_Index_In_Attacker(target_index);
 
-        yield return StartCoroutine(gm.Pass(on_ball_player, target_player));
+        yield return StartCoroutine(gm.Check_Pass_Success_And_Act(on_ball_player, target_player , pass_value , gm.default_ball_speed_degree , gm.default_ball_spin_degree));
 
     }
 

@@ -43,8 +43,9 @@ public class Skill_Database : MonoBehaviour
         gm.Set_Skill_Player(player);
         Skill skill = Get_Skill(action);
         int turn = gm.current_turn;
-        if (Can_Act_Action(player,action, turn, skill))
-            yield return StartCoroutine(Act_Skill_By_Ai(skill,target_index));
+
+        yield return StartCoroutine(Act_Skill_By_Ai(skill,target_index));
+        
 
     }
 

@@ -28,7 +28,7 @@ public class Flash_Pass_Skill : Skill
         float pass_value = (on_ball_player.Get_Pass_Value()-35) / 100f;
 
 
-        yield return StartCoroutine(gm.Pass_Coroutine(on_ball_player, pass_range:5, pass_value , (target_player) =>
+        yield return StartCoroutine(gm.Player_Pass_Coroutine(on_ball_player, pass_range:5, pass_value, gm.default_ball_speed_degree , gm.default_ball_spin_degree , (target_player) =>
         {
             target_player.additional_stat.score_value += 1;
             target_player.additional_stat.shoot_value += 10;
@@ -43,7 +43,7 @@ public class Flash_Pass_Skill : Skill
 
         yield return new WaitForSeconds(1);
 
-        StartCoroutine(gm.Pass(on_ball_player, target_player, action:(target) =>
+        yield return StartCoroutine(gm.Check_Pass_Success_And_Act(on_ball_player, target_player,pass_value , gm.default_ball_speed_degree , gm.default_ball_spin_degree, action:(target) =>
         {
             target_player.additional_stat.score_value += 1;
             target_player.additional_stat.shoot_value += 10;
